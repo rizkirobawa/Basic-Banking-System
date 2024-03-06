@@ -1,7 +1,7 @@
 "use strict";
 
 class BankAccount {
-  constructor(balance = 0) {
+  constructor(balance = 50000) {
     this.balance = balance;
   }
 
@@ -11,7 +11,7 @@ class BankAccount {
         if (amount > 0 && !isNaN(amount)) {
           this.balance += amount;
           resolve(
-            `Anda berhasil melakukan deposit sebesar ${amount}. Total Saldo Anda sekarang adalah : ${this.balance}`
+            `Anda berhasil melakukan deposit sebesar ${this.formatRupiah(amount)}.\nTotal Saldo Anda sekarang adalah : ${this.formatRupiah(this.balance)}`
           );
         } else if (isNaN(amount)) {
           return reject("Wrong input!");
@@ -28,7 +28,7 @@ class BankAccount {
         if (!isNaN(amount) && amount > 0 && amount <= this.balance) {
           this.balance -= amount;
           resolve(
-            `Anda berhasil melakukan deposit sebesar ${amount}. Total Saldo Anda sekarang adalah : ${this.balance}`
+            `Anda berhasil melakukan deposit sebesar ${this.formatRupiah(amount)}.\nTotal Saldo Anda sekarang adalah : ${this.formatRupiah(this.balance)}`
           );
         } else if (isNaN(amount)) {
           return reject("Wrong input!");
@@ -41,6 +41,14 @@ class BankAccount {
         }
       }, 3000);
     });
+  }
+
+  formatRupiah(amount) {
+    let formatSaldo = new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+    });
+    return formatSaldo.format(amount);
   }
 }
 
