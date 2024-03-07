@@ -3,43 +3,68 @@
 class BankAccount {
   constructor(balance = 50000) {
     this.balance = balance;
+    this.updateBalance();
   }
 
-  deposit(amount) {
+  async deposit() {
     return new Promise((resolve, reject) => {
+      const amount = parseInt(
+        window.prompt("Masukkan jumlah uang yang ingin Anda deposit:")
+      );
       setTimeout(() => {
         if (amount > 0 && !isNaN(amount)) {
           this.balance += amount;
           resolve(
-            `Anda berhasil melakukan deposit sebesar ${this.formatRupiah(amount)}.\nTotal Saldo Anda sekarang adalah : ${this.formatRupiah(this.balance)}`
+            `Anda berhasil melakukan deposit sebesar ${this.formatRupiah(
+              amount
+            )}.\nTotal Saldo Anda sekarang adalah : ${this.formatRupiah(
+              this.balance
+            )}`
           );
+          this.updateBalance();
         } else if (isNaN(amount)) {
-          return reject("Wrong input!");
+          return reject(window.alert("Wrong input!"));
         } else {
-          return reject("Saldo yang diinput tidak boleh 0");
+          return reject(
+            window.alert("Jumlah saldo yang diinput tidak boleh 0 atau negatif")
+          );
         }
       }, 3000);
+      window.alert(`Mohon tunggu sebentar...`);
     });
   }
 
-  withdraw(amount) {
+  async withdraw() {
     return new Promise((resolve, reject) => {
+      const amount = parseInt(
+        window.prompt("Masukkan jumlah uang yang ingin Anda withdraw:")
+      );
       setTimeout(() => {
         if (!isNaN(amount) && amount > 0 && amount <= this.balance) {
           this.balance -= amount;
           resolve(
-            `Anda berhasil melakukan deposit sebesar ${this.formatRupiah(amount)}.\nTotal Saldo Anda sekarang adalah : ${this.formatRupiah(this.balance)}`
+            `Anda berhasil melakukan deposit sebesar ${this.formatRupiah(
+              amount
+            )}.\nTotal Saldo Anda sekarang adalah : ${this.formatRupiah(
+              this.balance
+            )}`
           );
+          this.updateBalance();
         } else if (isNaN(amount)) {
-          return reject("Wrong input!");
+          return reject(window.alert("Wrong input!"));
         } else if (amount <= 0) {
-          return reject("Saldo yang diinput tidak boleh 0");
+          return reject(
+            window.alert("Jumlah saldo yang diinput tidak boleh 0 atau negatif")
+          );
         } else {
           return reject(
-            `Saldo yang diinput tidak boleh lebih besar dari saldo awal!`
+            window.alert(
+              `Saldo yang diinput tidak boleh lebih besar dari saldo awal!`
+            )
           );
         }
       }, 3000);
+      window.alert(`Mohon tunggu sebentar...`);
     });
   }
 
@@ -50,28 +75,70 @@ class BankAccount {
     });
     return formatSaldo.format(amount);
   }
+
+  updateBalance() {
+    document.getElementById("nilaiSaldo").textContent = this.formatRupiah(
+      this.balance
+    );
+  }
 }
 
 const myAccount = new BankAccount();
 
-async function transaction() {
+const depositButton = document.getElementById("depositButton");
+
+depositButton.addEventListener("click", async () => {
   try {
-    console.log(`Selamat Datang di BanK root`);
-    console.log(await myAccount.deposit(12000));
-    console.log(await myAccount.withdraw(10000));
+    await transactionDeposit();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+async function transactionDeposit() {
+  try {
+    window.alert(`Selamat Datang di BanK root`);
+    // window.alert(`Mohon tunggu sebentar...`);
+    const result = await myAccount.deposit();
+    window.alert(result);
     setTimeout(() => {
-      console.log(
+      window.alert(
         `Transaksi selesai. Menunggu beberapa saat sebelum keluar...`
       );
+      setTimeout(() => {
+        window.alert(`Terima Kasih`);
+      }, 1000);
     }, 2000);
   } catch (error) {
     console.log(error);
   }
 }
 
-(async () => {
-  await transaction();
-  setTimeout(() => {
-    console.log(`Terima Kasih`);
-  }, 5000);
-})();
+document
+  .getElementById("withdrawButton")
+  .addEventListener("click", async () => {
+    try {
+      await transactionWithdraw();
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+async function transactionWithdraw() {
+  try {
+    window.alert(`Selamat Datang di BanK root`);
+    // window.alert(`Mohon tunggu sebentar...`);
+    const result = await myAccount.withdraw();
+    window.alert(result);
+    setTimeout(() => {
+      window.alert(
+        `Transaksi selesai. Menunggu beberapa saat sebelum keluar...`
+      );
+      setTimeout(() => {
+        window.alert(`Terima Kasih`);
+      }, 1000);
+    }, 2000);
+  } catch (error) {
+    console.log(error);
+  }
+}
