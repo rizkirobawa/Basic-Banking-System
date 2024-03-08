@@ -108,9 +108,9 @@ async function transactionDeposit() {
       setTimeout(() => {
         window.alert(`Terima Kasih`);
       }, 1000);
-    }, 2000);
+    }, 1000);
   } catch (error) {
-    console.log(error);
+    console.log("Error:", error);
   }
 }
 
@@ -137,8 +137,8 @@ async function transactionWithdraw() {
       setTimeout(() => {
         window.alert(`Terima Kasih`);
       }, 1000);
-    }, 2000);
+    }, 1000);
   } catch (error) {
-    console.log(error);
+    console.log("Error:", error);
   }
 }
