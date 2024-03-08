@@ -1,9 +1,8 @@
 "use strict";
 
 class BankAccount {
-  constructor(balance = 50000) {
+  constructor(balance = 0) {
     this.balance = balance;
-    this.updateBalance();
   }
 
   async deposit() {
