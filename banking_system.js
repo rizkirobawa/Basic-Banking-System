@@ -84,65 +84,6 @@ class BankAccount {
 
 const myAccount = new BankAccount();
 
-// const depositButton = document.getElementById("depositButton");
-
-// depositButton.addEventListener("click", async () => {
-//   try {
-//     await transactionDeposit();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-
-// async function transactionDeposit() {
-//   try {
-//     window.alert(`Selamat Datang di BanK root`);
-//     // window.alert(`Mohon tunggu sebentar...`);
-//     const result = await myAccount.deposit();
-//     window.alert(result);
-//     setTimeout(() => {
-//       window.alert(
-//         `Transaksi selesai. Menunggu beberapa saat sebelum keluar...`
-//       );
-//       setTimeout(() => {
-//         window.alert(`Terima Kasih`);
-//       }, 1000);
-//     }, 1000);
-//   } catch (error) {
-//     console.log("Error:", error);
-//   }
-// }
-
-// document
-//   .getElementById("withdrawButton")
-//   .addEventListener("click", async () => {
-//     try {
-//       await transactionWithdraw();
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   });
-
-// async function transactionWithdraw() {
-//   try {
-//     window.alert(`Selamat Datang di BanK root`);
-//     // window.alert(`Mohon tunggu sebentar...`);
-//     const result = await myAccount.withdraw();
-//     window.alert(result);
-//     setTimeout(() => {
-//       window.alert(
-//         `Transaksi selesai. Menunggu beberapa saat sebelum keluar...`
-//       );
-//       setTimeout(() => {
-//         window.alert(`Terima Kasih`);
-//       }, 1000);
-//     }, 1000);
-//   } catch (error) {
-//     console.log("Error:", error);
-//   }
-// }
-
-// Fungsi untuk menangani transaksi (deposit atau withdraw)
 async function handleTransaction(action, transactionType) {
   try {
     window.alert(`Selamat Datang di BanK root`);
